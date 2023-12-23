@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -92,7 +93,8 @@ class SquigglySliderTest {
       Box(
         modifier = Modifier
           .fillMaxWidth()
-          .background(MaterialTheme.colorScheme.surface),
+          .background(MaterialTheme.colorScheme.surface)
+          .padding(vertical = 24.dp, horizontal = 16.dp),
         content = content,
         contentAlignment = Alignment.Center
       )
