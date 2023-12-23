@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
@@ -67,6 +66,19 @@ class SquigglySliderTest {
             wavelength = 24.dp,
           ),
           squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(0.5f)),
+        )
+      }
+    }
+  }
+
+  @Test fun `calculate the default values of squiggles based on the stroke width`() {
+    paparazzi.snapshot {
+      Scaffold {
+        SquigglySlider(
+          value = 0.6f,
+          onValueChange = {},
+          squigglesSpec = SquigglySlider.SquigglesSpec(strokeWidth = 30.dp),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(1f)),
         )
       }
     }

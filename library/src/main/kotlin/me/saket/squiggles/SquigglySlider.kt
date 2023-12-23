@@ -45,6 +45,7 @@ import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import me.saket.squiggles.SquigglySlider.SquigglesAnimator
 import me.saket.squiggles.SquigglySlider.SquigglesSpec
@@ -81,6 +82,10 @@ fun SquigglySlider(
         interactionSource = interactionSource,
         colors = colors,
         enabled = enabled,
+        thumbSize = DpSize(
+          width = squigglesSpec.strokeWidth.coerceAtLeast(2.dp),
+          height = (squigglesSpec.strokeWidth * 4).coerceAtLeast(12.dp),
+        ),
       )
     },
     track = { sliderState ->
@@ -119,8 +124,8 @@ object SquigglySlider {
   @Immutable
   class SquigglesSpec(
     val strokeWidth: Dp = 4.dp,
-    val wavelength: Dp = 24.dp,
-    val amplitude: Dp = 2.dp,
+    val wavelength: Dp = strokeWidth * 6,
+    val amplitude: Dp = strokeWidth / 2,
   )
 
   @Stable
