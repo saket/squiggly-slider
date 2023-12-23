@@ -117,7 +117,7 @@ object SquigglySlider {
   )
 
   @Stable
-  class SquigglesAnimator(
+  class SquigglesAnimator internal constructor(
     val animationProgress: State<Float>
   )
 
