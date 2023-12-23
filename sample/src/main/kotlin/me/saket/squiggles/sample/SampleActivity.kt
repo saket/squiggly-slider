@@ -17,6 +17,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +45,7 @@ class SampleActivity : AppCompatActivity() {
               .padding(24.dp),
             contentAlignment = Alignment.Center,
           ) {
-            var sliderValue by remember {
+            var sliderValue by rememberSaveable {
               mutableStateOf(0.4f)
             }
             SquigglySlider(
