@@ -89,8 +89,8 @@ fun SquigglySlider(
         colors = colors,
         enabled = enabled,
         thumbSize = DpSize(
-          width = squigglesSpec.strokeWidth.coerceAtLeast(2.dp),
-          height = (squigglesSpec.strokeWidth * 4).coerceAtLeast(12.dp),
+          width = squigglesSpec.strokeWidth.coerceAtLeast(4.dp),
+          height = (squigglesSpec.strokeWidth * 4).coerceAtLeast(16.dp),
         ),
       )
     },
@@ -131,8 +131,8 @@ object SquigglySlider {
   @Immutable
   class SquigglesSpec(
     val strokeWidth: Dp = 4.dp,
-    val wavelength: Dp = strokeWidth * 6,
-    val amplitude: Dp = strokeWidth / 2,
+    val wavelength: Dp = (strokeWidth * 6).coerceAtLeast(16.dp),
+    val amplitude: Dp = (strokeWidth / 2).coerceAtLeast(2.dp),
   )
 
   @Stable
