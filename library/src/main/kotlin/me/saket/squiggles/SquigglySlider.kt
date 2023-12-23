@@ -121,6 +121,7 @@ object SquigglySlider {
    *
    * ```
    */
+  @Poko
   @Immutable
   class SquigglesSpec(
     val strokeWidth: Dp = 4.dp,
