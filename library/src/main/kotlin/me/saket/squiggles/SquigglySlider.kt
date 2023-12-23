@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
@@ -208,11 +209,15 @@ object SquigglySlider {
               endOffset = sliderValueEnd,
               animationProgress = squigglesAnimator.animationProgress,
             )
-            drawPath(
-              path = path,
-              color = activeTrackColor,
-              style = pathStyle,
-            )
+            // Clip the active track because it can exceed the
+            // thumb's offset because of its rounded shape.
+            clipRect(right = sliderValueEnd.x) {
+              drawPath(
+                path = path,
+                color = activeTrackColor,
+                style = pathStyle,
+              )
+            }
           }
         }
     )
