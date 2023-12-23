@@ -11,10 +11,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.DragInteraction
-import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
@@ -29,10 +27,8 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -88,6 +84,7 @@ fun SquigglySlider(
     },
     track = { sliderState ->
       SquigglySlider.Track(
+        interactionSource = interactionSource,
         colors = colors,
         enabled = enabled,
         sliderState = sliderState,
@@ -139,20 +136,6 @@ object SquigglySlider {
     thumbSize: DpSize = DpSize(width = 4.dp, height = 16.dp),
     shape: Shape = RoundedCornerShape(4.dp),
   ) {
-    val interactions = remember { mutableStateListOf<Interaction>() }
-    LaunchedEffect(interactionSource) {
-      interactionSource.interactions.collect { interaction ->
-        when (interaction) {
-          is PressInteraction.Press -> interactions.add(interaction)
-          is PressInteraction.Release -> interactions.remove(interaction.press)
-          is PressInteraction.Cancel -> interactions.remove(interaction.press)
-          is DragInteraction.Start -> interactions.add(interaction)
-          is DragInteraction.Stop -> interactions.remove(interaction.start)
-          is DragInteraction.Cancel -> interactions.remove(interaction.start)
-        }
-      }
-    }
-
     Box(
       modifier = modifier.sizeIn(minWidth = 20.dp, minHeight = 20.dp),  // Set by Slider.
       contentAlignment = Alignment.Center,
@@ -162,7 +145,7 @@ object SquigglySlider {
           .size(thumbSize)
           .indication(
             interactionSource = interactionSource,
-            indication = androidx.compose.material.ripple.rememberRipple(
+            indication = rememberRipple(
               bounded = false,
               radius = maxOf(thumbSize.width, thumbSize.height) + 4.dp,
             )
