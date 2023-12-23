@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.paparazzi)
+  alias(libs.plugins.poko)
 }
 
 android {

@@ -13,6 +13,7 @@ paparazzi = "1.3.1" # https://github.com/cashapp/paparazzi/releases
 mavenPublish = "0.25.3" # https://github.com/vanniktech/gradle-maven-publish-plugin/releases
 dokka = "1.9.0" # https://github.com/kotlin/dokka/releases
 junit = "4.13.2"
+poko = "0.15.1" # https://github.com/drewhamilton/poko/releases
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -21,6 +22,7 @@ paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+poko = { id = "dev.drewhamilton.poko", version.ref = "poko" }
 
 [libraries]
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-ui" }

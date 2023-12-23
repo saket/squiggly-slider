@@ -18,6 +18,7 @@ plugins {
   alias(libs.plugins.mavenPublish) apply false
   alias(libs.plugins.paparazzi) apply false
   alias(libs.plugins.dokka) apply false
+  alias(libs.plugins.poko) apply false
 }
 
 allprojects {
