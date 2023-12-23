@@ -72,13 +72,26 @@ class SquigglySliderTest {
     }
   }
 
-  @Test fun `calculate the default values of squiggles based on the stroke width`() {
+  @Test fun `over-sized stroke width`() {
     paparazzi.snapshot {
       Scaffold {
         SquigglySlider(
           value = 0.6f,
           onValueChange = {},
           squigglesSpec = SquigglySlider.SquigglesSpec(strokeWidth = 30.dp),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(1f)),
+        )
+      }
+    }
+  }
+
+  @Test fun `super-thin stroke width`() {
+    paparazzi.snapshot {
+      Scaffold {
+        SquigglySlider(
+          value = 0.6f,
+          onValueChange = {},
+          squigglesSpec = SquigglySlider.SquigglesSpec(strokeWidth = 1.dp),
           squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(1f)),
         )
       }
