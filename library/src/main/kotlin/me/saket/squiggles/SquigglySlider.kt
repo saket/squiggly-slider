@@ -4,14 +4,18 @@ package me.saket.squiggles
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +52,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
+import dev.drewhamilton.poko.Poko
 import me.saket.squiggles.SquigglySlider.SquigglesAnimator
 import me.saket.squiggles.SquigglySlider.SquigglesSpec
 import kotlin.math.PI
@@ -166,6 +172,7 @@ object SquigglySlider {
   @Composable
   @ExperimentalMaterial3Api
   fun Track(
+    interactionSource: MutableInteractionSource,
     sliderState: SliderState,
     colors: SliderColors,
     modifier: Modifier = Modifier,
@@ -176,6 +183,13 @@ object SquigglySlider {
     val sliderHeight = (squigglesSpec.amplitude + squigglesSpec.strokeWidth) * 2
     val inactiveTrackColor = colors.trackColor(enabled, active = false)
     val activeTrackColor = colors.trackColor(enabled, active = true)
+
+    val isDragged by interactionSource.collectIsDraggedAsState()
+    val animatedAmplitude by animateDpAsState(
+      targetValue = if (isDragged) 0.dp else squigglesSpec.amplitude,
+      animationSpec = spring(stiffness = Spring.StiffnessLow),
+      label = "Squiggles amplitude",
+    )
 
     Spacer(
       modifier
@@ -210,7 +224,7 @@ object SquigglySlider {
             )
             path.rewind()
             path.buildSquigglesFor(
-              squigglesSpec = squigglesSpec,
+              squigglesSpec = squigglesSpec.copy(amplitude = animatedAmplitude),
               startOffset = sliderStart,
               endOffset = sliderValueEnd,
               animationProgress = squigglesAnimator.animationProgress,
@@ -273,5 +287,17 @@ object SquigglySlider {
       }
       pointX = (pointX + segmentWidth).coerceAtMost(waveEndOffset)
     }
+  }
+}
+
+private fun SquigglesSpec.copy(amplitude: Dp): SquigglesSpec {
+  return if (amplitude == this.amplitude) {
+    this
+  } else {
+    SquigglesSpec(
+      strokeWidth = this.strokeWidth,
+      wavelength = this.wavelength,
+      amplitude = amplitude,
+    )
   }
 }
