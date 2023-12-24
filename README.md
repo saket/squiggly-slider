@@ -6,9 +6,6 @@ implementation "androidx.compose.material3:material3:1.2.0-beta01"
 ```
 
 ```diff
-- import androidx.compose.material3.Slider
-+ import me.saket.squiggles.SquigglySlider
-
 - Slider(
 + SquigglySlider(
     value = sliderValue,
