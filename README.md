@@ -1,5 +1,7 @@
+![demo](demo.gif)
+
 ```groovy
-implementation "me.saket.squiggly-slider:squiggly-slider:1.0.0"
+implementation "me.saket.squigglyslider:squigglyslider:1.0.0"
 ```
 
 ```diff
