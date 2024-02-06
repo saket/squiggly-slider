@@ -1,18 +1,18 @@
 [versions]
 minSdk = "21"
 compileSdk = "34"
-kotlin = "1.9.20"
+kotlin = "1.9.22"
 agp = "8.1.4"
-compose-ui = "1.6.0-beta03"   # https://developer.android.com/jetpack/androidx/releases/compose-ui
-compose-compiler = "1.5.4" # https://developer.android.com/jetpack/androidx/releases/compose-compiler
-compose-material3 = "1.2.0-beta01"  # https://developer.android.com/jetpack/androidx/releases/compose-material3
+compose-ui = "1.6.0"   # https://developer.android.com/jetpack/androidx/releases/compose-ui
+compose-compiler = "1.5.8" # https://developer.android.com/jetpack/androidx/releases/compose-compiler
+compose-material3 = "1.2.0-rc01"  # https://developer.android.com/jetpack/androidx/releases/compose-material3
 androidx-appcompat = "1.6.1"
 androidx-activity = "1.8.2"  # https://developer.android.com/jetpack/androidx/releases/activity
 paparazzi = "1.3.1" # https://github.com/cashapp/paparazzi/releases
-mavenPublish = "0.25.3" # https://github.com/vanniktech/gradle-maven-publish-plugin/releases
-dokka = "1.9.0" # https://github.com/kotlin/dokka/releases
+mavenPublish = "0.27.0" # https://github.com/vanniktech/gradle-maven-publish-plugin/releases
+dokka = "1.9.10" # https://github.com/kotlin/dokka/releases
 junit = "4.13.2"
-poko = "0.15.1" # https://github.com/drewhamilton/poko/releases
+poko = "0.15.2" # https://github.com/drewhamilton/poko/releases
 blurhash = "0.2.0"  # https://github.com/vanniktech/blurhash/releases
 
 [plugins]
