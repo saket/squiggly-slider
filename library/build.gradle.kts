@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.paparazzi)
   alias(libs.plugins.poko)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -15,9 +16,6 @@ android {
   }
   buildFeatures {
     compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   lint {
     abortOnError = true

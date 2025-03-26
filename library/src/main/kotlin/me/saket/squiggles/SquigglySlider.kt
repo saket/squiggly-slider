@@ -143,7 +143,7 @@ object SquigglySlider {
   @Composable
   fun Thumb(
     interactionSource: MutableInteractionSource,
-    colors: SliderColors,
+    colors: SliderColors = SliderDefaults.colors(),
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     thumbSize: DpSize = DpSize(width = 4.dp, height = 16.dp),
@@ -172,10 +172,10 @@ object SquigglySlider {
   @Composable
   @ExperimentalMaterial3Api
   fun Track(
+    modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource,
     sliderState: SliderState,
-    colors: SliderColors,
-    modifier: Modifier = Modifier,
+    colors: SliderColors = SliderDefaults.colors(),
     squigglesSpec: SquigglesSpec = SquigglesSpec(),
     squigglesAnimator: SquigglesAnimator = rememberSquigglesAnimator(),
     enabled: Boolean = true,
