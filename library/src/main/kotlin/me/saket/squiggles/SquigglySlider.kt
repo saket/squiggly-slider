@@ -172,10 +172,10 @@ object SquigglySlider {
   @Composable
   @ExperimentalMaterial3Api
   fun Track(
-    modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource,
     sliderState: SliderState,
     colors: SliderColors = SliderDefaults.colors(),
+    modifier: Modifier = Modifier,
     squigglesSpec: SquigglesSpec = SquigglesSpec(),
     squigglesAnimator: SquigglesAnimator = rememberSquigglesAnimator(),
     enabled: Boolean = true,
